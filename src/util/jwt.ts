@@ -16,6 +16,6 @@ export function CreateToken(email: string, id: string) {
 }
 
 export function VerifyToken(token: string) {
-  const data = jwt.verify(token, privateKey);
+  const data = jwt.verify(token.split(" ")[1], privateKey);
   return data;
 }

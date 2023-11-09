@@ -11,8 +11,27 @@ const kanbanSchema = new Schema({
   name: String,
   description: String,
   kanban: {
-    type: Array,
-    require: true,
+    todo: [
+      {
+        id: String,
+        name: String,
+        description: String,
+      },
+    ],
+    inProgress: [
+      {
+        id: String,
+        name: String,
+        description: String,
+      },
+    ],
+    done: [
+      {
+        id: String,
+        name: String,
+        description: String,
+      },
+    ],
   },
 });
 

@@ -48,7 +48,7 @@ export async function CreateKanban(req: Request, res: Response) {
       .create({
         owner: data?.id,
         description: req.body?.description,
-        kanban: trial,
+        kanban:[],
         name: req.body?.name,
       })
       .then((data) => {
@@ -70,6 +70,7 @@ export default async function GetKanban(req: Request, res: Response) {
         ? await kanbanModel.find({ owner: data?.id }).where({ name: name })
         : await kanbanModel.find({ owner: data?.id });
 
+    console.log(kanbanBords);
     res.status(200).send(kanbanBords);
   } catch (error) {
     res.status(500).send(error);
@@ -83,9 +84,8 @@ export async function UpdateKanban(req: Request, res: Response) {
 
     const name = req.query.name;
 
-    console.log(req.body.kanban);
     const kanbanBords = await kanbanModel
-      .findOneAndReplace(
+      .findOneAndUpdate(
         {
           owner: data?.id,
           name: name,
