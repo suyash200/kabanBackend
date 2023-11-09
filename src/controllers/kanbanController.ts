@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { VerifyToken, token } from "../util/jwt.js";
 import { kanbanModel } from "../model/kanbanModel.js";
+import { randomUUID } from "crypto";
 
 const trial = [
   [
@@ -44,11 +45,16 @@ export async function CreateKanban(req: Request, res: Response) {
   try {
     const token = req.headers.authorization as string;
     const data: any = VerifyToken(token);
+    console.log(req.body)
     await kanbanModel
       .create({
         owner: data?.id,
         description: req.body?.description,
-        kanban:[],
+        kanban: {
+          todo: [],
+          inProgress: [],
+          done: [],
+        },
         name: req.body?.name,
       })
       .then((data) => {
@@ -70,7 +76,6 @@ export default async function GetKanban(req: Request, res: Response) {
         ? await kanbanModel.find({ owner: data?.id }).where({ name: name })
         : await kanbanModel.find({ owner: data?.id });
 
-    console.log(kanbanBords);
     res.status(200).send(kanbanBords);
   } catch (error) {
     res.status(500).send(error);
