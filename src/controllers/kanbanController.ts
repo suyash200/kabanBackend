@@ -3,49 +3,11 @@ import { VerifyToken, token } from "../util/jwt.js";
 import { kanbanModel } from "../model/kanbanModel.js";
 import { randomUUID } from "crypto";
 
-const trial = [
-  [
-    {
-      id: "12",
-      name: "Study",
-      description: "somesd",
-    },
-    {
-      id: "45",
-      name: "Wor",
-      description: "some",
-    },
-  ],
-  [
-    {
-      id: "34",
-      name: "Studys",
-      description: "somead",
-    },
-    {
-      id: "4",
-      name: "Wo2r",
-      description: "some2",
-    },
-  ],
-  [
-    {
-      id: "3",
-      name: "Stud",
-      description: "som3e",
-    },
-    {
-      id: "5",
-      name: "Wo2r3",
-      description: "some32",
-    },
-  ],
-];
 export async function CreateKanban(req: Request, res: Response) {
   try {
     const token = req.headers.authorization as string;
     const data: any = VerifyToken(token);
-    console.log(req.body)
+
     await kanbanModel
       .create({
         owner: data?.id,
@@ -106,3 +68,5 @@ export async function UpdateKanban(req: Request, res: Response) {
     res.status(500).send(error);
   }
 }
+
+
