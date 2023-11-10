@@ -14,7 +14,7 @@ dotenv.config();
 const app: Express = express();
 const port = process.env.PORT as string;
 
-app.use(cors({ origin: "http://localhost:3000" }));
+app.use(cors({ origin: ["http://localhost:3000","https://kanban-frontend-six.vercel.app"] }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
