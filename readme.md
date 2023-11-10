@@ -24,7 +24,7 @@ git clone https://github.com/suyash200/EventsBackend.git
 2. Change to the project directory:
 
 ```shell
-cd EventsBackend
+cd kanbanBackend
 ```
 
 3. Install the dependencies:
